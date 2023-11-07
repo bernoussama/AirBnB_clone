@@ -5,7 +5,6 @@
 
 import uuid
 from datetime import datetime
-import time
 
 
 class BaseModel:
