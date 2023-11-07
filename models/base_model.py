@@ -8,15 +8,20 @@ from datetime import datetime
 
 
 class BaseModel:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         BaseModel constuctor
         """
-
-        self.updated_at = datetime.now()
-        self.id = str(uuid.uuid4())
-        # time when this function is called
-        self.created_at = datetime.now()
+        print(kwargs)
+        if kwargs:
+            self.updated_at = datetime.fromisoformat(kwargs.get("updated_at"))
+            self.created_at = datetime.fromisoformat(kwargs.get("created_at"))
+            self.id = kwargs["id"]
+        else:
+            self.updated_at = datetime.now()
+            self.id = str(uuid.uuid4())
+            # time when this function is called
+            self.created_at = datetime.now()
 
     def __str__(self):
         """
@@ -47,7 +52,7 @@ if __name__ == "__main__":
     bm1 = BaseModel()
     # print(f"__str__:{bm1}")
 
-    print(bm1)
+    bm1_dict = bm1.to_dict()
 
-    print()
-    print(f"to_dict:{bm1.to_dict()}")
+    bm2 = BaseModel(**bm1_dict)
+    print(bm2)
