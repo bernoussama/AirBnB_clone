@@ -2,6 +2,8 @@
 
 import unittest
 
+from models.base_model import BaseModel
+
 
 class TestModels(unittest.TestCase):
     def test_uuid(self):
