@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-# pycodestyle --show-source --show-pep8 models/*.py
+pycodestyle --show-source --show-pep8 models/*.py
 if [ "$?" == "0" ]; then
     push "$1"
 fi
