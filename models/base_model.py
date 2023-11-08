@@ -28,7 +28,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             # time when this function is called
             self.created_at = datetime.now()
-            storage.new(self.to_dict())
+            storage.new(self)
 
     def __str__(self):
         """
