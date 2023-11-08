@@ -32,7 +32,14 @@ class FileStorage:
         """
         filename = self.__file_path
         with open(filename, "w") as f:
-            json.dump(self.__objects, f)
+            # json.dump(self.__objects, f)
+            json.dump(
+                {
+                    k: v.to_dict() if not isinstance(v, dict) else v
+                    for k, v in self.__objects.items()
+                },
+                f,
+            )
 
     def reload(self):
         """
