@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from uuid import uuid4
 from models.base_model import BaseModel
 import unittest
 from datetime import datetime
@@ -88,3 +89,23 @@ class TestBaseModel(unittest.TestCase):
             "created_at": instance.created_at.isoformat(),
         }
         self.assertEqual(instance.to_dict(), expected_dict)
+
+    def test_instantiation_with_dict(self):
+        # Define a dictionary with the required keys
+        data = {
+            "id": str(uuid4()),
+            "updated_at": datetime.now().isoformat(),
+            "created_at": datetime.now().isoformat(),
+        }
+
+        # Pass the dictionary to the BaseModel constructor
+        bm = BaseModel(**data)
+
+        # Check that the object has the correct attributes
+        self.assertEqual(bm.id, data["id"])
+        self.assertEqual(bm.updated_at.isoformat(), data["updated_at"])
+        self.assertEqual(bm.created_at.isoformat(), data["created_at"])
+
+
+if __name__ == "__main__":
+    unittest.main()
