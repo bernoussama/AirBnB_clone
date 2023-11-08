@@ -5,6 +5,7 @@
 
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -27,6 +28,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             # time when this function is called
             self.created_at = datetime.now()
+            storage.new(self.to_dict())
 
     def __str__(self):
         """
@@ -40,6 +42,7 @@ class BaseModel:
         updated_at with the current datetime
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
