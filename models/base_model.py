@@ -5,7 +5,6 @@
 
 import uuid
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -18,6 +17,8 @@ class BaseModel:
         """
         BaseModel constuctor
         """
+        from models import storage
+
         print(kwargs)
         if kwargs:
             self.updated_at = datetime.fromisoformat(kwargs.get("updated_at"))
@@ -41,6 +42,8 @@ class BaseModel:
         updates the public instance attribute
         updated_at with the current datetime
         """
+        from models import storage
+
         self.updated_at = datetime.now()
         storage.save()
 
