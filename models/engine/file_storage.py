@@ -22,7 +22,9 @@ class FileStorage:
         """
         sets in __objects the obj with key <obj class name>.id
         """
-        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        the_key = f"{obj.__class__.__name__}.{obj.id}"
+        print(the_key)
+        self.__objects[the_key] = obj
 
     def save(self):
         """
@@ -30,7 +32,14 @@ class FileStorage:
         """
         filename = self.__file_path
         with open(filename, "w") as f:
-            json.dump(self.__objects, f)
+            # json.dump(self.__objects, f)
+            json.dump(
+                {
+                    k: v.to_dict() if not isinstance(v, dict) else v
+                    for k, v in self.__objects.items()
+                },
+                f,
+            )
 
     def reload(self):
         """
