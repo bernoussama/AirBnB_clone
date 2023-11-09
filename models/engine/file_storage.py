@@ -25,7 +25,6 @@ class FileStorage:
         sets in __objects the obj with key <obj class name>.id
         """
         the_key = f"{obj.__class__.__name__}.{obj.id}"
-        print(the_key)
         self.__objects[the_key] = obj
 
     def save(self):
@@ -34,7 +33,7 @@ class FileStorage:
         """
         filename = self.__file_path
         try:
-            with open(filename, "w") as f:
+            with open(filename, "w", encoding="utf-8") as f:
                 # json.dump(self.__objects, f)
                 try:
                     json.dump(
@@ -45,7 +44,7 @@ class FileStorage:
                         f,
                     )
                 except json.JSONDecodeError as e:
-                    print(e)
+                    print(f"JSONDecodeError to handle: {e}")
                     return
         except (FileNotFoundError, FileExistsError):
             return
@@ -58,12 +57,9 @@ class FileStorage:
         If the file doesn’t exist, no exception should be raised)
         """
         try:
-            with open(self.__file_path, "r") as f:
-                content = f.read()
-                if content == "":
-                    return
+            with open(self.__file_path, "r", encoding="utf-8") as f:
                 dicts = json.load(f)
-        except (FileNotFoundError, FileExistsError, json.JSONDecodeError):
+        except (FileNotFoundError, FileExistsError):
             return
 
         for _, v in dicts.items():

@@ -17,14 +17,14 @@ class BaseModel:
         """
         BaseModel constuctor
         """
-        from models import storage
 
-        print(kwargs)
         if kwargs:
             self.updated_at = datetime.fromisoformat(kwargs.get("updated_at"))
             self.created_at = datetime.fromisoformat(kwargs.get("created_at"))
             self.id = kwargs["id"]
         else:
+            from models import storage
+
             self.updated_at = datetime.now()
             self.id = str(uuid.uuid4())
             # time when this function is called
