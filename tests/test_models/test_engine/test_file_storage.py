@@ -34,14 +34,28 @@ class TestFileStorage(unittest.TestCase):
         Test that save properly serializes __objects to the JSON file
         """
         # You might need to read the file and check its contents
-        self.assertEqual(True, True)
+        try:
+            with open("test.json") as f:
+                obj = json.load(f)
+        except (FileNotFoundError, FileExistsError):
+            return
+        self.storage.save()
+        with open("test.json") as f:
+            obj2 = json.load(f)
+        self.assertEqual(obj, obj2)
 
     def test_reload(self):
         """
         Test that reload properly deserializes the JSON file to __objects
         """
         # You might need to modify the file, call reload and check __objects
-        self.assertEqual(True, True)
+        try:
+            with open("test.json") as f:
+                obj = json.load(f)
+        except (FileNotFoundError, FileExistsError):
+            return
+        self.storage.reload()
+        self.assertEqual(obj, self.storage.all())
 
 
 if __name__ == "__main__":
