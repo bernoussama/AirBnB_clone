@@ -49,18 +49,8 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        this_dict = self.__dict__
+        this_dict = self.__dict__.copy()
         this_dict["__class__"] = self.__class__.__name__
         this_dict["updated_at"] = self.updated_at.isoformat()
         this_dict["created_at"] = self.created_at.isoformat()
         return this_dict
-
-
-if __name__ == "__main__":
-    bm1 = BaseModel()
-    # print(f"__str__:{bm1}")
-
-    bm1_dict = bm1.to_dict()
-
-    bm2 = BaseModel(**bm1_dict)
-    print(bm2)
