@@ -162,4 +162,4 @@ cython_debug/
 # ignore json files
 *.json
 # Ignore provided test files
-test_*.py
+./test_*.py
