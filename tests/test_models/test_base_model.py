@@ -95,6 +95,15 @@ class TestBaseModel(unittest.TestCase):
         }
         self.assertEqual(instance.to_dict()["id"], expected_dict["id"])
 
+    def test_to_dict(self):
+        """Test the to_dict method"""
+        model = BaseModel()
+        model_dict = model.to_dict()
+        self.assertIsInstance(model_dict, dict)
+        self.assertEqual(model_dict["__class__"], "BaseModel")
+        self.assertIsInstance(model_dict["updated_at"], str)
+        self.assertIsInstance(model_dict["created_at"], str)
+
     #  BaseModel instance can be converted to dictionary with __class__ attribute
     def test_to_dict_class_attribute(self):
         instance = BaseModel()
