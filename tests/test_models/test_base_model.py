@@ -6,7 +6,6 @@ import os
 from uuid import uuid4
 import unittest
 from datetime import datetime
-
 from models.base_model import BaseModel
 
 
@@ -164,6 +163,8 @@ class TestBaseModelSave(unittest.TestCase):
             return
         from models import storage
         from models.base_model import BaseModel
+
+        instance = BaseModel()
 
         self.assertEqual(obj, storage.all())
 
