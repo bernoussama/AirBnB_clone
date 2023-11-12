@@ -50,7 +50,6 @@ class TestFileStorage(unittest.TestCase):
         """
         Test that save properly serializes __objects to the JSON file
         """
-        # You might need to read the file and check its contents
         try:
             with open("test.json") as f:
                 obj = json.load(f)
@@ -65,7 +64,6 @@ class TestFileStorage(unittest.TestCase):
         """
         Test that reload properly deserializes the JSON file to __objects
         """
-        # You might need to modify the file, call reload and check __objects
         try:
             with open("test.json") as f:
                 obj = json.load(f)
