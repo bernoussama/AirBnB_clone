@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+"""Unittest for file_storage.py"""
+
 import os
 import unittest
 from models.engine import file_storage
@@ -18,6 +22,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.__file_path = "test.json"
 
     def tearDown(self):
+        """Tears down test methods"""
         try:
             os.remove("test.json")
         except IOError:
