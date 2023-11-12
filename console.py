@@ -42,7 +42,8 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in get_classes():
             print("** class doesn't exist **")
         else:
-            instance = eval(arg)()  # eval(arg)() creates an instance of the class
+            # eval(arg)() creates an instance of the class
+            instance = eval(arg)()
             instance.save()
             print(instance.id)
 
