@@ -1,3 +1,4 @@
+import os
 import unittest
 from models.engine import file_storage
 import json
@@ -8,6 +9,11 @@ class TestFileStorage(unittest.TestCase):
         """
         Set up for the tests.
         """
+
+        try:
+            os.remove("test.json")
+        except IOError:
+            pass
         self.storage = file_storage.FileStorage()
         self.storage.__file_path = "test.json"
 
