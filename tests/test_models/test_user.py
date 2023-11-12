@@ -20,6 +20,14 @@ class TestUser(unittest.TestCase):
         self.assertEqual(my_user.email, "")
         self.assertEqual(my_user.password, "root")
 
+        self.assertTrue(hasattr(my_user, "id"))
+        self.assertTrue(hasattr(my_user, "created_at"))
+        self.assertTrue(hasattr(my_user, "updated_at"))
+        self.assertTrue(hasattr(my_user, "first_name"))
+        self.assertTrue(hasattr(my_user, "last_name"))
+        self.assertTrue(hasattr(my_user, "email"))
+        self.assertTrue(hasattr(my_user, "password"))
+
         self.assertIsInstance(my_user.created_at, datetime)
         self.assertIsInstance(my_user.updated_at, datetime)
         self.assertIsInstance(my_user.id, str)
