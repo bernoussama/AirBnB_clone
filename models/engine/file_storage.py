@@ -62,6 +62,8 @@ class FileStorage:
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
                 dicts = json.load(f)
+                for k, v in dicts.items():
+                    self.__objects[k] = BaseModel(**v)
         except (FileNotFoundError, FileExistsError):
             pass
 

@@ -5,6 +5,6 @@ from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """Class for managing state """
+    """Class for managing state"""
 
     name = ""

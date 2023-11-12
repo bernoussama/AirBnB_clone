@@ -41,6 +41,41 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif arg not in get_classes():
             print("** class doesn't exist **")
+        else:
+            instance = eval(arg)()  # eval(arg)() creates an instance of the class
+            instance.save()
+            print(instance.id)
+
+    def do_show(self, arg):
+        """Prints the string representation of an instance"""
+        if arg == "" or arg is None:
+            print("** class name missing **")
+        elif arg.split()[0] not in get_classes():
+            print("** class doesn't exist **")
+        elif len(arg.split()) == 1:
+            print("** instance id missing **")
+        else:
+            key = arg.split()[0] + "." + arg.split()[1]
+            if key in storage.all().keys():
+                print(storage.all()[key])
+            else:
+                print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
+        if arg == "" or arg is None:
+            print("** class name missing **")
+        elif arg.split()[0] not in get_classes():
+            print("** class doesn't exist **")
+        elif len(arg.split()) == 1:
+            print("** instance id missing **")
+        else:
+            key = arg.split()[0] + "." + arg.split()[1]
+            if key in storage.all().keys():
+                del storage.all()[key]
+                storage.save()
+            else:
+                print("** no instance found **")
 
 
 if __name__ == "__main__":
