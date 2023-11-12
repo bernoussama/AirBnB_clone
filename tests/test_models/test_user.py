@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from datetime import datetime
 import unittest
 from models.user import User
 
@@ -18,6 +19,14 @@ class TestUser(unittest.TestCase):
         self.assertEqual(my_user.last_name, "Holberton")
         self.assertEqual(my_user.email, "")
         self.assertEqual(my_user.password, "root")
+
+        self.assertIsInstance(my_user.created_at, datetime)
+        self.assertIsInstance(my_user.updated_at, datetime)
+        self.assertIsInstance(my_user.id, str)
+        self.assertIsInstance(my_user.first_name, str)
+        self.assertIsInstance(my_user.last_name, str)
+        self.assertIsInstance(my_user.email, str)
+        self.assertIsInstance(my_user.password, str)
 
     def test_first_name(self):
         """Test the User class"""
