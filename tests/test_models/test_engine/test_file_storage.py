@@ -17,6 +17,12 @@ class TestFileStorage(unittest.TestCase):
         self.storage = file_storage.FileStorage()
         self.storage.__file_path = "test.json"
 
+    def tearDown(self):
+        try:
+            os.remove("test.json")
+        except IOError:
+            pass
+
     def test_all(self):
         """
         Test that all returns the dictionary __objects
