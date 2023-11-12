@@ -38,13 +38,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(instance1.id, instance2.id)
 
     def test_created_at_attribute(self):
-        """Test BaseModel instance has created_at attribute set to current datetime"""
+        """Test BaseModel instance has created_at
+        attribute set to current datetime"""
         instance = BaseModel()
         self.assertIsInstance(instance.created_at, datetime)
         # self.assertEqual(instance.created_at, instance.updated_at)
 
     def test_updated_at_attribute(self):
-        """Test BaseModel instance has updated_at attribute set to current datetime"""
+        """Test BaseModel instance has updated_at
+        attribute set to current datetime"""
         instance = BaseModel()
         self.assertIsInstance(instance.updated_at, datetime)
         # self.assertEqual(instance.created_at, instance.updated_at)
@@ -52,9 +54,13 @@ class TestBaseModel(unittest.TestCase):
     def test_string_representation(self):
         """Test BaseModel instance can be printed as string"""
         instance = BaseModel()
+
+        # fmt: off
         expected_output = (
-            f"[{instance.__class__.__name__}] ({instance.id}) {instance.__dict__}"
+            f"[{instance.__class__.__name__}] ({instance.id}) "
+            + f"{instance.__dict__}"
         )
+        # fmt: on
         self.assertEqual(str(instance), expected_output)
 
     def test_save_method(self):
@@ -67,7 +73,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(old_updated_at, instance.updated_at)
 
     def test_multiple_saves(self):
-        """Test BaseModel instance can be saved multiple times with updated updated_at attribute"""
+        """Test BaseModel instance can be saved multiple times
+        with updated updated_at attribute"""
         from models.base_model import BaseModel
 
         instance = BaseModel()
@@ -178,7 +185,6 @@ class TestToDict(unittest.TestCase):
         self.assertIsInstance(model_dict["updated_at"], str)
         self.assertIsInstance(model_dict["created_at"], str)
 
-    #  BaseModel instance can be converted to dictionary with __class__ attribute
     def test_to_dict_class_attribute(self):
         """Test the to_dict method"""
         instance = BaseModel()
