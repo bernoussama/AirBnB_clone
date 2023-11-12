@@ -1,11 +1,24 @@
 #!/usr/bin/python3
+"""Unittest for BaseModel class"""
+
+import json
+import os
 from uuid import uuid4
-from models.base_model import BaseModel
 import unittest
 from datetime import datetime
 
+from models.base_model import BaseModel
+
 
 class TestBaseModel(unittest.TestCase):
+    """Test cases for BaseModel class"""
+
+    def test_init(self):
+        """Test BaseModel class initialization"""
+        instance = BaseModel()
+        self.assertIs(type(instance), BaseModel)
+        self.assertIsInstance(instance, BaseModel)
+
     #  BaseModel instance is created successfully
     def test_instance_creation(self):
         instance = BaseModel()
@@ -109,6 +122,50 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(bm.id, data["id"])
         self.assertEqual(bm.updated_at.isoformat(), data["updated_at"])
         self.assertEqual(bm.created_at.isoformat(), data["created_at"])
+
+
+class TestBaseModelSave(unittest.TestCase):
+    def setUp(self):
+        """Sets up test methods"""
+        try:
+            os.remove("test.json")
+        except IOError:
+            pass
+
+    def tearDown(self):
+        """Tears down test methods"""
+        self.setUp()
+        # try:
+        #     os.remove("test.json")
+        # except IOError:
+        #     pass
+
+    def test_save(self):
+        """
+        Test that save properly serializes __objects to the JSON file
+        """
+        # You might need to read the file and check its contents
+        try:
+            with open("test.json") as f:
+                obj = json.load(f)
+        except (FileNotFoundError, FileExistsError):
+            return
+        instance = BaseModel()
+        instance.save()
+        with open("test.json") as f:
+            obj2 = json.load(f)
+        self.assertEqual(obj, obj2)
+
+    def test_reload(self):
+        try:
+            with open("test.json") as f:
+                obj = json.load(f)
+        except IOError:
+            return
+        from models import storage
+        from models.base_model import BaseModel
+
+        self.assertEqual(obj, storage.all())
 
 
 if __name__ == "__main__":
