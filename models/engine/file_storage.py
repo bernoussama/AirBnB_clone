@@ -6,6 +6,7 @@ class FileStorage that serializes instances to a JSON file
 import json
 import datetime
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -63,7 +64,19 @@ class FileStorage:
             with open(self.__file_path, "r", encoding="utf-8") as f:
                 dicts = json.load(f)
                 for k, v in dicts.items():
-                    self.__objects[k] = BaseModel(**v)
+                    # self.__objects[k] = BaseModel(**v)
+                    # might need to remove (**v)
+                    self.__objects[k] = eval(k.split(".")[0])(**v)
+                    for attr_k, attr_v in v.items():
+                        if (
+                            attr_k == "__class__"
+                            or attr_k == "created_at"
+                            or attr_k == "updated_at"
+                        ):
+                            continue
+                        setattr(self.__objects[k], attr_k, attr_v)
+                    # self.__objects[k] = eval(v["__class__"])(**v)
+
         except (FileNotFoundError, FileExistsError):
             pass
 
