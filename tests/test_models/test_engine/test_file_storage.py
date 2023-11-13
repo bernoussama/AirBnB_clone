@@ -15,7 +15,7 @@ class TestFileStorage(unittest.TestCase):
         """
 
         try:
-            os.remove("test.json")
+            os.rename("file.json", "tmp.json")
         except IOError:
             pass
         self.storage = file_storage.FileStorage()
@@ -24,7 +24,8 @@ class TestFileStorage(unittest.TestCase):
     def tearDown(self):
         """Tears down test methods"""
         try:
-            os.remove("test.json")
+            os.remove("file.json")
+            os.rename("tmp.json", "file.json")
         except IOError:
             pass
 
