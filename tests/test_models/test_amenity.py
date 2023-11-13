@@ -33,28 +33,27 @@ class TestAmenity(unittest.TestCase):
 
     def test_amenity(self):
         """Test the Amenity class"""
-        my_amenity = Amenity()
-        my_amenity.name = "Betty"
-        self.assertEqual(my_amenity.name, "Betty")
-        self.assertTrue(hasattr(my_amenity, "id"))
-        self.assertTrue(hasattr(my_amenity, "created_at"))
-        self.assertTrue(hasattr(my_amenity, "updated_at"))
-        self.assertTrue(hasattr(my_amenity, "name"))
-        self.assertIsInstance(my_amenity.id, str)
-        self.assertIsInstance(my_amenity.name, str)
+        self.amenity.name = "Betty"
+        self.assertEqual(self.amenity.name, "Betty")
+        self.assertTrue(hasattr(self.amenity, "id"))
+        self.assertTrue(hasattr(self.amenity, "created_at"))
+        self.assertTrue(hasattr(self.amenity, "updated_at"))
+        self.assertTrue(hasattr(self.amenity, "name"))
+        self.assertIsInstance(self.amenity.id, str)
+        self.assertIsInstance(self.amenity.name, str)
         self.assertTrue(issubclass(Amenity, BaseModel))
 
     def test_str(self):
         """Test for __str__ method"""
-        my_amenity = Amenity()
+        self.amenity = Amenity()
         self.assertEqual(
-            str(my_amenity),
-            "[Amenity] ({}) {}".format(my_amenity.id, my_amenity.__dict__),
+            str(self.amenity),
+            "[Amenity] ({}) {}".format(self.amenity.id, self.amenity.__dict__),
         )
 
     def test_to_dict(self):
         """Test for to_dict method"""
-        my_amenity = Amenity()
-        self.assertEqual(type(my_amenity.to_dict()), dict)
-        self.assertTrue(my_amenity.to_dict()["__class__"], "Amenity")
-        self.assertTrue("to_dict" in dir(my_amenity))
+        self.amenity = Amenity()
+        self.assertEqual(type(self.amenity.to_dict()), dict)
+        self.assertTrue(self.amenity.to_dict()["__class__"], "Amenity")
+        self.assertTrue("to_dict" in dir(self.amenity))
