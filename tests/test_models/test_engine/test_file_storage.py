@@ -39,11 +39,12 @@ class TestFileStorage(unittest.TestCase):
                 obj = json.load(f)
         except (FileNotFoundError, FileExistsError):
             return
-        store.save()
 
+        store.save()
         with open("test.json") as f:
             obj2 = json.load(f)
         self.assertEqual(obj, obj2)
+        self.assertIn(obj, obj2)
 
         try:
             with open("test.json") as f:
