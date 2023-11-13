@@ -33,14 +33,16 @@ class TestAmenity(unittest.TestCase):
 
     def test_amenity(self):
         """Test the Amenity class"""
-        self.amenity.name = "Betty"
-        self.assertEqual(self.amenity.name, "Betty")
+        self.assertEqual(self.amenity.name, "")
+
         self.assertTrue(hasattr(self.amenity, "id"))
         self.assertTrue(hasattr(self.amenity, "created_at"))
         self.assertTrue(hasattr(self.amenity, "updated_at"))
         self.assertTrue(hasattr(self.amenity, "name"))
+
         self.assertIsInstance(self.amenity.id, str)
         self.assertIsInstance(self.amenity.name, str)
+
         self.assertTrue(issubclass(Amenity, BaseModel))
 
     def test_str(self):
