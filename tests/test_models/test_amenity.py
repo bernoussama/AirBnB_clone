@@ -46,3 +46,18 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(my_amenity.id, str)
         self.assertIsInstance(my_amenity.name, str)
         self.assertTrue(issubclass(Amenity, BaseModel))
+
+    def test_str(self):
+        """Test for __str__ method"""
+        my_amenity = Amenity()
+        self.assertEqual(
+            str(my_amenity),
+            "[Amenity] ({}) {}".format(my_amenity.id, my_amenity.__dict__),
+        )
+
+    def test_to_dict(self):
+        """Test for to_dict method"""
+        my_amenity = Amenity()
+        self.assertEqual(type(my_amenity.to_dict()), dict)
+        self.assertTrue(my_amenity.to_dict()["__class__"], "Amenity")
+        self.assertTrue("to_dict" in dir(my_amenity))
