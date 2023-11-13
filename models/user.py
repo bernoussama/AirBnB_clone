@@ -11,8 +11,3 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
-
-
-if __name__ == "__main__":
-    u = User()
-    print(dir(u))

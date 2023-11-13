@@ -33,14 +33,10 @@ class TestUser(unittest.TestCase):
 
     def test_user(self):
         """Test the User class"""
-        self.my_user.first_name = "Betty"
-        self.my_user.last_name = "Holberton"
-        self.my_user.email = ""
-        self.my_user.password = "root"
-        self.assertEqual(self.my_user.first_name, "Betty")
-        self.assertEqual(self.my_user.last_name, "Holberton")
+        self.assertEqual(self.my_user.first_name, "")
+        self.assertEqual(self.my_user.last_name, "")
         self.assertEqual(self.my_user.email, "")
-        self.assertEqual(self.my_user.password, "root")
+        self.assertEqual(self.my_user.password, "")
 
         self.assertTrue(hasattr(self.my_user, "id"))
         self.assertTrue(hasattr(self.my_user, "created_at"))
