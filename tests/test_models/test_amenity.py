@@ -36,9 +36,9 @@ class TestAmenity(unittest.TestCase):
         my_amenity = Amenity()
         my_amenity.name = "Betty"
         self.assertEqual(my_amenity.name, "Betty")
-        # self.assertTrue(hasattr(my_amenity, "id"))
-        # self.assertTrue(hasattr(my_amenity, "created_at"))
-        # self.assertTrue(hasattr(my_amenity, "updated_at"))
+        self.assertTrue(hasattr(my_amenity, "id"))
+        self.assertTrue(hasattr(my_amenity, "created_at"))
+        self.assertTrue(hasattr(my_amenity, "updated_at"))
         self.assertTrue(hasattr(my_amenity, "name"))
         self.assertIsInstance(my_amenity.id, str)
         self.assertIsInstance(my_amenity.name, str)
