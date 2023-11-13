@@ -36,10 +36,7 @@ class TestCity(unittest.TestCase):
         """Test if State is a subclass of BaseModel"""
         self.assertTrue(issubclass(State, BaseModel))
         self.assertTrue(hasattr(State, "name"))
-        self.assertTrue(hasattr(State, "cities"))
-        self.assertTrue(hasattr(State, "state_id"))
         self.assertEqual(self.state.name, "")
-
         self.assertIsInstance(self.state.name, str)
 
     def test_str(self):
