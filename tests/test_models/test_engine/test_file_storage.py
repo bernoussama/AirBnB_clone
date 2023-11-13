@@ -14,9 +14,9 @@ class TestFileStorage(unittest.TestCase):
         """
         store = file_storage.FileStorage()
         self.assertIsInstance(store, file_storage.FileStorage)
-        # self.assertEqual(store.__file_path, "file.json")
-        # self.assertIsInstance(store.__objects, dict)
-        # self.assertEqual(store.__objects, {})
+        self.assertEqual(file_storage.FileStorage.__file_path, "file.json")
+        self.assertIsInstance(file_storage.FileStorage.__objects, dict)
+        self.assertEqual(store.__objects, {})
         self.assertTrue(hasattr(store, "all"))
         self.assertTrue(hasattr(store, "new"))
         self.assertTrue(hasattr(store, "save"))
