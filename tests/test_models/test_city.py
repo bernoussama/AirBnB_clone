@@ -4,7 +4,6 @@ import os
 import unittest
 from models.base_model import BaseModel
 from models.city import City
-import datetime
 
 from models.engine import file_storage
 
