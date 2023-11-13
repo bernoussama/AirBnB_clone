@@ -23,6 +23,9 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(hasattr(store, "save"))
         self.assertTrue(hasattr(store, "reload"))
 
+        self.assertIsInstance(storage.all(), dict)
+        self.assertNotEqual(storage.all(), {})
+
         try:
             with open("test.json") as f:
                 obj = json.load(f)
@@ -37,6 +40,7 @@ class TestFileStorage(unittest.TestCase):
         except (FileNotFoundError, FileExistsError):
             return
         store.save()
+
         with open("test.json") as f:
             obj2 = json.load(f)
         self.assertEqual(obj, obj2)
