@@ -7,61 +7,75 @@ from uuid import uuid4
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
+from models.engine import file_storage
 
 
 class TestBaseModel(unittest.TestCase):
     """Test cases for BaseModel class"""
 
+    def setUp(self):
+        """
+        Set up for the tests.
+        """
+
+        try:
+            os.rename("file.json", "tmp.json")
+        except IOError:
+            pass
+        self.storage = file_storage.FileStorage()
+        self.instance = BaseModel()
+
+    def tearDown(self):
+        """Tears down test methods"""
+        try:
+            os.remove("file.json")
+            os.rename("tmp.json", "file.json")
+        except IOError:
+            pass
+
     def test_init(self):
         """Test BaseModel class initialization"""
-        instance = BaseModel()
-        self.assertIs(type(instance), BaseModel)
-        self.assertIsInstance(instance, BaseModel)
-        self.assertIsInstance(instance, BaseModel)
+        self.assertIs(type(self.instance), BaseModel)
+        self.assertIsInstance(self.instance, BaseModel)
+        self.assertIsInstance(self.instance, BaseModel)
 
     def test_init_kwargs(self):
         """Test BaseModel class initialization with **kwargs"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.created_at, datetime)
-        self.assertIsInstance(instance.updated_at, datetime)
-        self.assertIsInstance(instance.id, str)
+        self.assertIsInstance(self.instance.created_at, datetime)
+        self.assertIsInstance(self.instance.updated_at, datetime)
+        self.assertIsInstance(self.instance.id, str)
 
     def test_instance_creation(self):
-        """Test BaseModel instance creation"""
-        instance = BaseModel()
-        self.assertIsInstance(instance, BaseModel)
+        """Test BaseModel self.instance creation"""
+        self.assertIsInstance(self.instance, BaseModel)
 
     def test_unique_id(self):
-        """Test BaseModel instance has unique id"""
+        """Test BaseModel self.instance has unique id"""
         instance1 = BaseModel()
         instance2 = BaseModel()
         self.assertNotEqual(instance1.id, instance2.id)
 
     def test_created_at_attribute(self):
-        """Test BaseModel instance has created_at
+        """Test BaseModel self.instance has created_at
         attribute set to current datetime"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.created_at, datetime)
-        # self.assertEqual(instance.created_at, instance.updated_at)
+        self.assertIsInstance(self.instance.created_at, datetime)
+        # self.assertEqual(self.instance.created_at, instance.updated_at)
 
     def test_updated_at_attribute(self):
-        """Test BaseModel instance has updated_at
+        """Test BaseModel self.instance has updated_at
         attribute set to current datetime"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.updated_at, datetime)
-        # self.assertEqual(instance.created_at, instance.updated_at)
+        self.assertIsInstance(self.instance.updated_at, datetime)
+        # self.assertEqual(self.instance.created_at, instance.updated_at)
 
     def test_string_representation(self):
-        """Test BaseModel instance can be printed as string"""
-        instance = BaseModel()
-
+        """Test BaseModel self.instance can be printed as string"""
         # fmt: off
         expected_output = (
-            f"[{instance.__class__.__name__}] ({instance.id}) "
-            + f"{instance.__dict__}"
+            f"[{self.instance.__class__.__name__}] ({self.instance.id}) "
+            + f"{self.instance.__dict__}"
         )
         # fmt: on
-        self.assertEqual(str(instance), expected_output)
+        self.assertEqual(str(self.instance), expected_output)
 
     def test_save_method(self):
         """Test BaseModel instance can be saved successfully"""
