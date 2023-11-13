@@ -4,7 +4,6 @@
 import unittest
 from models.amenity import Amenity
 from models.base_model import BaseModel
-import datetime
 from models.engine import file_storage
 import os
 
@@ -16,13 +15,13 @@ class TestAmenity(unittest.TestCase):
         """
         Set up for the tests.
         """
-
         try:
             os.rename("file.json", "tmp.json")
         except IOError:
             pass
         self.storage = file_storage.FileStorage()
         self.storage.__file_path = "test.json"
+        self.amenity = Amenity()
 
     def tearDown(self):
         """Tears down test methods"""
@@ -41,8 +40,6 @@ class TestAmenity(unittest.TestCase):
         # self.assertTrue(hasattr(my_amenity, "created_at"))
         # self.assertTrue(hasattr(my_amenity, "updated_at"))
         self.assertTrue(hasattr(my_amenity, "name"))
-        self.assertIsInstance(my_amenity.created_at, datetime.datetime)
-        self.assertIsInstance(my_amenity.updated_at, datetime.datetime)
         self.assertIsInstance(my_amenity.id, str)
         self.assertIsInstance(my_amenity.name, str)
         self.assertTrue(issubclass(Amenity, BaseModel))

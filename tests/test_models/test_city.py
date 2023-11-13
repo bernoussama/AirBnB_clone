@@ -15,7 +15,6 @@ class TestCity(unittest.TestCase):
         """
         Set up for the tests.
         """
-
         try:
             os.rename("file.json", "tmp.json")
         except IOError:
