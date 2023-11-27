@@ -49,3 +49,46 @@
   font-weight: 400;
   font-size: 14px;
 }
+
+.filters h3 {
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.filters h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.filters .popover {
+  display: none;
+  background-color: #fafafa;
+  margin-left: -20px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  list-style-type: none;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  z-index: 10;
+  position: relative;
+}
+
+.filters h2 {
+  margin: 0px;
+  font-size: 16px;
+  margin-left: -13px;
+}
+
+.filters .locations li:nth-child(4) {
+  margin-top: 20px;
+}
+
+.filters li {
+  cursor: pointer;
+}
+
+.filters .locations:hover .popover,
+.filters .amenities:hover .popover {
+  display: block;
+}
